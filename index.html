@@ -33,22 +33,26 @@
     </div>
   </header>
 
-  <!-- ===== ABOUT (kompakt) ===== -->
+  <!-- ===== ABOUT (kompaktowy kolorystyczny box z animacją) ===== -->
   <section id="about" class="about">
     <div class="container">
-      <div class="about__card content-section animate">
-        <div class="about__text section-content">
+      <article class="about-card">
+        <div class="about-card__inner">
           <h2 class="section-title">O mnie</h2>
           <p class="about__lead">
             Łączę kreatywność z celami biznesowymi. Tworzę treści i krótkie formy wideo,
             projektuję lekkie animacje i pomagam markom mówić prosto i skutecznie.
           </p>
           <ul class="about__chips" aria-label="Umiejętności">
-            <li>Copywriting</li><li>Content Strategy</li><li>SEO</li>
-            <li>Video Editing</li><li>Motion Design</li><li>HTML/CSS</li>
+            <li>Copywriting</li>
+            <li>Content Strategy</li>
+            <li>SEO</li>
+            <li>Video Editing</li>
+            <li>Motion Design</li>
+            <li>HTML/CSS</li>
           </ul>
         </div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -105,40 +109,37 @@
     </div>
   </section>
 
-  <!-- ===== SERVICES (Twoja wersja „boxed”) ===== -->
-  <section id="services">
+  <!-- ===== SERVICES (themed glass/neo karty) ===== -->
+  <section id="services" class="services">
     <div class="container">
-      <div class="content-section">
-        <div class="section-content">
-          <h2 class="section-title">Usługi</h2>
-          <p class="muted">
-            Pomagam firmom i twórcom w całym procesie komunikacji – od pomysłu i strategii,
-            przez teksty i SEO, aż po krótkie wideo i animacje, które przyciągają uwagę
-            i zamieniają odbiorców w klientów.
-          </p>
+      <header class="services__header">
+        <h2 class="section-title">Co robię</h2>
+        <p class="services__lead">
+          Pomagam firmom i twórcom w całym procesie komunikacji – od strategii i tekstów,
+          przez SEO, po krótkie wideo i motion design.
+        </p>
+      </header>
 
-          <div class="services-grid services-grid--boxed">
-            <div class="service-card service-card--boxed" tabindex="0">
-              <h3>✍️ Copywriting</h3>
-              <p>Strony, oferty, maile i krótkie teksty w produktach. Styl dopasowany do Twojej marki.</p>
-            </div>
+      <div class="services-grid services-grid--themed" aria-live="polite">
+        <article class="service-card service-card--themed" tabindex="0">
+          <h3>✍️ Copywriting</h3>
+          <p>Strony, oferty, maile i mikrocopy w produktach. Styl dopasowany do brand voice.</p>
+        </article>
 
-            <div class="service-card service-card--boxed" tabindex="0">
-              <h3>📝 Content & SEO</h3>
-              <p>Artykuły, research, struktura tekstów, metaopisy i linkowanie wewnętrzne.</p>
-            </div>
+        <article class="service-card service-card--themed" tabindex="0">
+          <h3>📝 Content & SEO</h3>
+          <p>Artykuły, research, struktury Hx, meta, linkowanie wewnętrzne i topical authority.</p>
+        </article>
 
-            <div class="service-card service-card--boxed" tabindex="0">
-              <h3>🎬 Montaż wideo</h3>
-              <p>Krótkie filmy, promocje, tutoriale. Dobór ujęć, montaż, napisy, korekcja kolorów.</p>
-            </div>
+        <article class="service-card service-card--themed" tabindex="0">
+          <h3>🎬 Montaż wideo</h3>
+          <p>Krótkie formaty, promki, tutoriale. Korekcja barwna, napisy, rytm i storytelling.</p>
+        </article>
 
-            <div class="service-card service-card--boxed" tabindex="0">
-              <h3>🎨 Motion Design</h3>
-              <p>Intro/outro, animacje elementów interfejsu, proste explainer’y i animacje logo.</p>
-            </div>
-          </div>
-        </div>
+        <article class="service-card service-card--themed" tabindex="0">
+          <h3>🎨 Motion Design</h3>
+          <p>Intro/outro, elementy UI, proste explainery i animacje logo.</p>
+        </article>
       </div>
     </div>
   </section>
