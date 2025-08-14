@@ -14,37 +14,53 @@ function setActiveLink(){
 }
 window.addEventListener('scroll', setActiveLink);
 
+/* ========= ABOUT: animacja wejścia boxu ========= */
+const aboutCard = qs('.about-card');
+if (aboutCard){
+  const ioAbout = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (!e.isIntersecting) return;
+      aboutCard.classList.add('animate');
+      ioAbout.unobserve(aboutCard);
+    });
+  }, {threshold:.2, rootMargin:'0px 0px -60px 0px'});
+  ioAbout.observe(aboutCard);
+}
+
 /* ========= REEL: wysuwanie z dołu ========= */
 const REVEAL_MS = 550;
 const reel  = qs('#reel');
-const items = qsa('.reel__item', reel);
+const items = qsa('.reel__item', reel || undefined);
 let revealed = false;
 
 function runReveal(){
   if (revealed) return;
   revealed = true;
+  if (!reel) return;
   qsa('video', reel).forEach(v => v.pause());
   items.forEach((item, i) => setTimeout(() => item.classList.add('is-visible'), i * REVEAL_MS));
 }
-const ioReel = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) runReveal(); });
-}, { threshold: .25 });
-if (reel) ioReel.observe(reel);
+if (reel){
+  const ioReel = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) runReveal(); });
+  }, { threshold: .25 });
+  ioReel.observe(reel);
+}
 
-/* ========= SERVICES: animacja wejścia kart boxed ========= */
+/* ========= SERVICES: sekwencyjna animacja kart ========= */
 const servicesGrid = qs('.services-grid');
 if (servicesGrid){
-  const cards = qsa('.service-card--boxed', servicesGrid);
-  const ioServices = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  const cards = qsa('.service-card--themed', servicesGrid);
+  const ioServices = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
       if (!entry.isIntersecting) return;
-      cards.forEach((card, i) => setTimeout(() => {
+      cards.forEach((card, i)=>setTimeout(()=>{
         card.style.opacity = '1';
         card.style.transform = 'translateY(0)';
-      }, i * 150));
-      ioServices.unobserve(entry.target);
+      }, i*140));
+      ioServices.unobserve(servicesGrid);
     });
-  }, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
   ioServices.observe(servicesGrid);
 }
 
@@ -61,12 +77,16 @@ function openLightbox({ type, src, title }){
 
   if (type === 'video'){
     const v = document.createElement('video');
-    v.src = src; v.controls = true; v.autoplay = true; v.playsInline = true;
+    v.src = src;
+    v.controls = true;
+    v.autoplay = true;
+    v.playsInline = true;
     v.setAttribute('muted',''); // iOS autoplay-safe
     lbStage.appendChild(v);
   } else {
     const img = document.createElement('img');
-    img.src = src; img.alt = title || '';
+    img.src = src;
+    img.alt = title || '';
     lbStage.appendChild(img);
   }
 
@@ -88,7 +108,7 @@ function onEscClose(e){ if (e.key === 'Escape') closeLightbox(); }
 lbClose.addEventListener('click', closeLightbox);
 lbBack .addEventListener('click', closeLightbox);
 
-/* Kliknięcie w kafelek – otwórz podgląd */
+/* Klik w kafelek – otwórz podgląd */
 qsa('.reel__item').forEach(card => {
   card.addEventListener('click', () => {
     const type  = card.getAttribute('data-type');
