@@ -1,756 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kacper Bieliński - Portfolio Copywriter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kacper Bieliński – Portfolio</title>
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            transition: all 0.3s ease;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #667eea;
-        }
-
-        /* Sections */
-        section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 80px 0;
-            position: relative;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            font-weight: 400;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-
-        .hero .email {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            border: 2px solid white;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.9s both;
-            font-weight: 500;
-        }
-
-        .cta-button:hover {
-            background: white;
-            color: #667eea;
-        }
-
-        /* Content Sections */
-        .content-section {
-            background: white;
-            margin: 50px 0;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .content-section.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-content {
-            padding: 60px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 30px;
-            position: relative;
-            font-weight: 600;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        .highlight {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-        }
-
-        /* Service Cards */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .service-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-        }
-
-        .service-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .service-card p {
-            color: #666;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-
-        /* Case Study Cards */
-        .case-study {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 40px;
-            margin: 30px 0;
-            border-left: 5px solid #667eea;
-            transition: transform 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .case-study.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .case-study:hover {
-            transform: translateY(-5px);
-        }
-
-        .case-study h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .case-study .meta {
-            display: flex;
-            gap: 20px;
-            margin: 15px 0;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .case-study .content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border: 1px solid #eee;
-        }
-
-        /* AI Section */
-        .ai-tools {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .ai-tool {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .ai-tool.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .ai-tool h4 {
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        /* Social Post */
-        .social-post {
-            background: #1da1f2;
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-
-        .social-post .hashtags {
-            margin-top: 15px;
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        /* Skills */
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .skill {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.4s ease;
-        }
-
-        .skill.animate {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Contact */
-        .contact-section {
-            background: linear-gradient(135deg, #333 0%, #667eea 100%);
-            color: white;
-            text-align: center;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-content {
-                padding: 30px;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .case-study {
-                padding: 20px;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets-styles.css" />
+  <script defer src="./assets-scripts.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#home">Start</a></li>
-            <li><a href="#about">O mnie</a></li>
-            <li><a href="#services">Usługi</a></li>
-            <li><a href="#ai">AI w pracy</a></li>
-            <li><a href="#cases">Case Studies</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-        </ul>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <h1>Kacper Bieliński</h1>
-            <p class="subtitle">Copywriter | Content Specialist | Video Editor | Motion Designer</p>
-            <p class="email">bielinskikacper666@gmail.com</p>
-            <a href="#about" class="cta-button">Zobacz moje portfolio</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="content-section">
-                <div class="section-content">
-                    <h2 class="section-title">O mnie</h2>
-                    <p style="font-size: 1.2rem; margin-bottom: 30px; font-weight: 400;">
-                        <span class="highlight">Tworzę treści, które łączą kreatywność z celami biznesowymi.</span>
-                    </p>
-                    <p style="margin-bottom: 20px;">
-                        Każdy projekt zaczynam od zadania kluczowych pytań: dla kogo tworzymy, jaki jest cel, gdzie treść będzie prezentowana i jaką funkcję ma pełnić. To podejście pozwala mi dostarczać rozwiązania, które naprawdę działają.
-                    </p>
-                    <p style="margin-bottom: 20px;">
-                        Specjalizuję się w tworzeniu różnorodnych form contentu – od tekstów sprzedażowych i artykułów SEO, przez materiały wideo i grafiki motion, po kompletne strategie content marketingowe.
-                    </p>
-                    <p style="margin-bottom: 30px;">
-                        Doskonale czuję się w środowisku e-commerce i współpracy z zespołami marketingowymi. Znam najnowsze narzędzia AI, podstawy techniczne (HTML/CSS) i potrafię optymalizować treści pod kątem SEO bez utraty ich naturalności.
-                    </p>
-                    
-                    <div class="skills">
-                        <span class="skill">Copywriting</span>
-                        <span class="skill">Content Strategy</span>
-                        <span class="skill">Video Editing</span>
-                        <span class="skill">Motion Design</span>
-                        <span class="skill">ChatGPT</span>
-                        <span class="skill">Midjourney</span>
-                        <span class="skill">SEO</span>
-                        <span class="skill">HTML/CSS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <div class="content-section">
-                <div class="section-content">
-                    <h2 class="section-title">Usługi</h2>
-                    <p style="margin-bottom: 40px; font-size: 1.1rem; color: #666;">
-                        Oferuję kompleksowe usługi w zakresie tworzenia i optymalizacji treści dla różnych kanałów komunikacji.
-                    </p>
-                    
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <h3>✍️ Copywriting</h3>
-                            <p>Teksty sprzedażowe, landing page'y, emaile marketingowe, opisy produktów i kampanie reklamowe. Tworzę przekaz, który przekonuje i sprzedaje.</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h3>📝 Content Marketing</h3>
-                            <p>Artykuły SEO, posty na social media, newslettery i treści edukacyjne. Strategia contentu dostosowana do Twojej grupy docelowej.</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h3>🎬 Video Content</h3>
-                            <p>Montaż filmów promocyjnych, materiałów edukacyjnych i contentu na social media. Od koncepcji po finalizację.</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h3>🎨 Motion Design</h3>
-                            <p>Animacje, grafiki motion, intro/outro do filmów, reklamy animowane. Wizualny storytelling, który przyciąga uwagę.</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h3>🤖 AI-Powered Content</h3>
-                            <p>Optymalizacja procesów twórczych za pomocą AI. Szybsze research, generowanie wariantów i automatyzacja powtarzalnych zadań.</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h3>📊 SEO Content</h3>
-                            <p>Treści zoptymalizowane pod wyszukiwarki, które jednocześnie angażują czytelników. Badanie słów kluczowych i analiza konkurencji.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Section with Styled Container and Expanded Text -->
-<style>
-    #ai .content-section {
-        max-width: 5000px;
-        margin: 0 auto;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
-    #ai .section-content {
-        padding: 40px;
-    }
-    
-</style>
-<section id="ai">
-    <div class="container">
-        <div class="content-section">
-            <div class="section-content">
-                <h2 class="section-title">Jak wykorzystuję AI w pracy</h2>
-                <p style="margin-bottom: 30px; font-style: italic; font-weight: 400;">
-                    AI to narzędzie, które przyspiesza i wzmacnia pracę twórczą – ale nigdy jej nie zastępuje. To sposób na efektywniejsze działanie, nie na zastąpienie kreatywności.
-                </p>
-                <p style="margin-bottom: 20px;">
-                    W pracy z contentem traktuję sztuczną inteligencję jak partnera do burzy mózgów i katalizatora procesów. Dzięki niej mogę szybciej przeprowadzać research, porównywać dane, analizować trendy i lepiej zrozumieć oczekiwania użytkowników.
-                </p>
-                <p style="margin-bottom: 20px;">
-                    AI pomaga mi generować pomysły na nagłówki, struktury artykułów, warianty CTA, a także koncepcje video czy animacji. Korzystam m.in. z narzędzi takich jak <strong>ChatGPT</strong>, <strong>Perplexity</strong>, <strong>Claude</strong> czy <strong>Midjourney</strong>, by zwiększyć tempo pracy i jej jakość.
-                </p>
-                <p style="margin-bottom: 20px;">
-                    Przykładowo, w ciągu kilkunastu minut mogę stworzyć trzy wersje tego samego tekstu – każdą dopasowaną do innego kanału, tonu komunikacji lub grupy docelowej. A potem: polish ręczny, redakcja i publikacja.
-                </p>
-                <p style="margin-bottom: 20px;">
-                    AI wspiera mnie też w automatyzacji rutynowych zadań – np. adaptacji treści na różne formaty, edytowaniu opisów meta czy konwersji scenariuszy video na posty blogowe.
-                </p>
-                <p>
-                    To wszystko sprawia, że mogę więcej czasu poświęcić temu, co naprawdę ważne: strategii, jakości i efekcie końcowym.
-                </p>
-            </div>
-        </div>
+  <!-- ===== NAV (pełne tło) ===== -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#home" aria-label="Strona startowa">KB</a>
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#home">Start</a></li>
+        <li><a class="nav__link" href="#about">O mnie</a></li>
+        <li><a class="nav__link" href="#reel">Portfolio</a></li>
+        <li><a class="nav__link" href="#services">Co robię</a></li>
+        <li><a class="nav__link" href="#contact">Kontakt</a></li>
+      </ul>
     </div>
-</section>
+  </nav>
 
-                    
-                    <div class="ai-tools">
-                        <div class="ai-tool">
-                            <h4>🔍 Research i analiza</h4>
-                            <p>Szybkie zbieranie danych, analiza trendów i competitor research z wykorzystaniem ChatGPT i Perplexity</p>
-                        </div>
-                        <div class="ai-tool">
-                            <h4>✍️ Generowanie konceptów</h4>
-                            <p>Tworzenie nagłówków, outline'ów tekstów, wariantów CTA i metaopisów jako baza do dalszej pracy</p>
-                        </div>
-                        <div class="ai-tool">
-                            <h4>🎨 Wizualizacja</h4>
-                            <p>Midjourney do tworzenia konceptów graficznych, mood boardów i materiałów wizualnych</p>
-                        </div>
-                        <div class="ai-tool">
-                            <h4>⚡ Automatyzacja</h4>
-                            <p>Masowe przetwarzanie tekstów, adaptacja treści na różne formaty i optymalizacja istniejącego contentu</p>
-                        </div>
-                        <div class="ai-tool">
-                            <h4>✨ Edycja i polishing</h4>
-                            <p>Dopracowanie stylu, dostosowanie tone of voice i finalne szlifowanie treści</p>
-                        </div>
-                        <div class="ai-tool">
-                            <h4>📹 Video Enhancement</h4>
-                            <p>Generowanie skryptów, planowanie shot list i optymalizacja procesu pre-produkcji</p>
-                        </div>
-                    </div>
-                </div>
+  <!-- ===== HERO ===== -->
+  <header id="home" class="hero">
+    <div class="container">
+      <h1>Kacper Bieliński</h1>
+      <p class="subtitle">Copywriter • Content Specialist • Video Editor • Motion Designer</p>
+      <a class="cta" href="#reel">Zjedź niżej, aby zobaczyć prace</a>
+    </div>
+  </header>
+
+  <!-- ===== ABOUT (kompakt) ===== -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about__card content-section animate">
+        <div class="about__text section-content">
+          <h2 class="section-title">O mnie</h2>
+          <p class="about__lead">
+            Łączę kreatywność z celami biznesowymi. Tworzę treści i krótkie formy wideo,
+            projektuję lekkie animacje i pomagam markom mówić prosto i skutecznie.
+          </p>
+          <ul class="about__chips" aria-label="Umiejętności">
+            <li>Copywriting</li><li>Content Strategy</li><li>SEO</li>
+            <li>Video Editing</li><li>Motion Design</li><li>HTML/CSS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REEL (portfolio feed) ===== -->
+  <section id="reel" class="reel">
+    <div class="container">
+      <h2 class="reel__title">Wybrane realizacje</h2>
+
+      <div class="reel__track" aria-live="polite">
+        <!-- 1 -->
+        <article class="reel__item" data-type="image" data-src="./grafika1.svg" data-title="Ilustracja – SVG">
+          <figure class="media media--img"><div class="media__inner">
+            <img src="./grafika1.svg" alt="Ilustracja wektorowa (SVG)" loading="lazy" />
+          </div></figure>
+          <header class="meta"><h3>Ilustracja – SVG</h3><p>Wykorzystanie w kampanii</p></header>
+        </article>
+
+        <!-- 2 -->
+        <article class="reel__item" data-type="image" data-src="./grafika3.png" data-title="Ikony UI – PNG">
+          <figure class="media media--img"><div class="media__inner">
+            <img src="./grafika3.png" alt="Zestaw ikon UI (PNG)" loading="lazy" />
+          </div></figure>
+          <header class="meta"><h3>Ikony UI</h3><p>Set pod aplikację</p></header>
+        </article>
+
+        <!-- 3 -->
+        <article class="reel__item" data-type="image" data-src="./run.svg" data-title="Infografika – SVG">
+          <figure class="media media--img"><div class="media__inner">
+            <img src="./run.svg" alt="Infografika (SVG)" loading="lazy" />
+          </div></figure>
+          <header class="meta"><h3>Infografika</h3><p>Wizualizacja danych</p></header>
+        </article>
+
+        <!-- 4 (wideo) -->
+        <article class="reel__item" data-type="video" data-src="./grafika4.mp4" data-title="Logo – animacja">
+          <figure class="media media--video"><div class="media__inner">
+            <video src="./grafika4.mp4" muted playsinline preload="metadata"></video>
+          </div></figure>
+          <header class="meta"><h3>Logo – animacja</h3><p>Krótka forma motion</p></header>
+        </article>
+
+        <!-- 5 -->
+        <article class="reel__item" data-type="image" data-src="./grafika2.svg" data-title="Ilustracja 2 – SVG">
+          <figure class="media media--img"><div class="media__inner">
+            <img src="./grafika2.svg" alt="Ilustracja wektorowa 2 (SVG)" loading="lazy" />
+          </div></figure>
+          <header class="meta"><h3>Ilustracja 2</h3><p>Styl flat z gradientem</p></header>
+        </article>
+      </div>
+
+      <div class="reel__actions">
+        <a href="portfolio.html" class="cta ghost">Zobacz więcej</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES (Twoja wersja „boxed”) ===== -->
+  <section id="services">
+    <div class="container">
+      <div class="content-section">
+        <div class="section-content">
+          <h2 class="section-title">Usługi</h2>
+          <p class="muted">
+            Pomagam firmom i twórcom w całym procesie komunikacji – od pomysłu i strategii,
+            przez teksty i SEO, aż po krótkie wideo i animacje, które przyciągają uwagę
+            i zamieniają odbiorców w klientów.
+          </p>
+
+          <div class="services-grid services-grid--boxed">
+            <div class="service-card service-card--boxed" tabindex="0">
+              <h3>✍️ Copywriting</h3>
+              <p>Strony, oferty, maile i krótkie teksty w produktach. Styl dopasowany do Twojej marki.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Case Studies Section -->
-    <section id="cases">
-        <div class="container">
-            <div class="content-section">
-                <div class="section-content">
-                    <h2 class="section-title">Case Studies</h2>
-                    
-                    <!-- Case Study 1 -->
-                    <div class="case-study">
-                        <h3>📝 Artykuł SEO z elementami video</h3>
-                        <div class="meta">
-                            <span><strong>Projekt:</strong> Kompleksowy poradnik z materiałami wideo</span>
-                        </div>
-                        <div class="meta">
-                            <span><strong>Cel:</strong> Zwiększenie ruchu organicznego i time on page</span>
-                            <span><strong>Narzędzia:</strong> ChatGPT, SurferSEO, Adobe Premiere, After Effects</span>
-                        </div>
-                        <div class="content">
-                            <p><strong>Wyzwanie:</strong> Stworzenie zaangażującego contentu, który będzie dobrze pozycjonowany w Google i zatrzyma uwagę użytkowników.</p>
-                            <p><strong>Rozwiązanie:</strong> Połączenie zoptymalizowanego SEO tekstu z krótkimi filmami instruktażowymi i animacjami motion graphics.</p>
-                            <p><strong>Efekt:</strong> 300% wzrost czasu spędzonego na stronie i pozycja #3 dla głównego słowa kluczowego.</p>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 2 -->
-                    <div class="case-study">
-                        <h3>🎬 Kampania video + copy dla e-commerce</h3>
-                        <div class="meta">
-                            <span><strong>Projekt:</strong> Seria filmów produktowych z tekstami sprzedażowymi</span>
-                            <span><strong>Cel:</strong> Zwiększenie konwersji w sklepie online</span>
-                        </div>
-                        <div class="content">
-                            <p><strong>Zakres prac:</strong></p>
-                            <ul>
-                                <li>Scenariusze do 15 filmów produktowych</li>
-                                <li>Montaż i color grading materiałów</li>
-                                <li>Motion graphics z logo i call-to-action</li>
-                                <li>Opisy produktów dostosowane do filmów</li>
-                                <li>Kampania email marketingowa</li>
-                            </ul>
-                            <p><strong>Efekt:</strong> 45% wzrost konwersji w kategoriach objętych kampanią.</p>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 3 -->
-                    <div class="case-study">
-                        <h3>📱 360° Content Strategy</h3>
-                        <div class="meta">
-                            <span><strong>Projekt:</strong> Kompleksowa strategia contentu dla startupu tech</span>
-                            <span><strong>Cel:</strong> Budowanie świadomości marki i generowanie leadów</span>
-                        </div>
-                        <div class="content">
-                            <p><strong>Działania:</strong></p>
-                            <ul>
-                                <li>Blog z artykułami thought leadership</li>
-                                <li>Serie edukacyjnych filmów na YouTube</li>
-                                <li>Content na LinkedIn z animowanymi infografikami</li>
-                                <li>Email nurturing sequence</li>
-                                <li>Landing pages z A/B testowanym copy</li>
-                            </ul>
-                            <p><strong>Narzędzia AI:</strong> ChatGPT do research i brainstormingu, Midjourney do grafik, Claude do edycji tekstów.</p>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 4 -->
-                    <div class="case-study">
-                        <h3>📱 Social media z motion graphics</h3>
-                        <div class="meta">
-                            <span><strong>Temat:</strong> Kampania produktowa z animacjami</span>
-                            <span><strong>Cel:</strong> Zwiększenie engagement i sprzedaży</span>
-                        </div>
-                        <div class="social-post">
-                            <p><strong>Przykład posta z motion graphics:</strong></p>
-                            <p>🚀 NOWY PRODUKT JUŻ DOSTĘPNY!</p>
-                            <p>Zobacz, jak w 30 sekund zmieni Twój workflow:</p>
-                            <p>[Tutaj animacja pokazująca before/after]</p>
-                            <p>✅ 3x szybszy proces<br>
-                            ✅ Zero błędów<br>
-                            ✅ Intuicyjna obsługa</p>
-                            <p>Sprawdź już dziś → link w bio</p>
-                            <div class="hashtags">
-                                #productivity #workflow #newproduct #animation #business
-                            </div>
-                        </div>
-                        <div class="content">
-                            <p><strong>Proces tworzenia:</strong></p>
-                            <p>1. <strong>Koncepcja:</strong> Storyboard w oparciu o user journey<br>
-                            2. <strong>Motion:</strong> After Effects - animacja UI i przejścia<br>
-                            3. <strong>Copy:</strong> Krótki, actionable tekst z clear CTA<br>
-                            4. <strong>A/B test:</strong> 3 warianty animacji + copy</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="service-card service-card--boxed" tabindex="0">
+              <h3>📝 Content & SEO</h3>
+              <p>Artykuły, research, struktura tekstów, metaopisy i linkowanie wewnętrzne.</p>
             </div>
+
+            <div class="service-card service-card--boxed" tabindex="0">
+              <h3>🎬 Montaż wideo</h3>
+              <p>Krótkie filmy, promocje, tutoriale. Dobór ujęć, montaż, napisy, korekcja kolorów.</p>
+            </div>
+
+            <div class="service-card service-card--boxed" tabindex="0">
+              <h3>🎨 Motion Design</h3>
+              <p>Intro/outro, animacje elementów interfejsu, proste explainer’y i animacje logo.</p>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Porozmawiajmy o Twoim projekcie!</h2>
-            <p style="font-size: 1.3rem; margin-bottom: 30px; font-weight: 400;">
-                Jeśli szukasz kogoś, kto:
-            </p>
-            <ul style="font-size: 1.2rem; margin-bottom: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; font-weight: 400;">
-                <li>łączy kreatywność z myśleniem biznesowym</li>
-                <li>wykorzystuje AI do efektywniejszej pracy</li>
-                <li>tworzy content w różnych formatach</li>
-                <li>dba o jakość i terminowość</li>
-            </ul>
-            <p style="font-size: 1.3rem; margin-bottom: 30px; font-weight: 400;">
-                – napisz do mnie. Chętnie opowiem o kolejnych projektach i pokażę więcej przykładów.
-            </p>
-            <a href="mailto:bielinskikacper666@gmail.com" class="cta-button" style="font-size: 1.2rem;">
-                Napisz do mnie: bielinskikacper666@gmail.com
-            </a>
-        </div>
-    </section>
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Kontakt</h2>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+      <div class="contact__box">
+        <a class="contact__mail" href="mailto:bielinskikacper666@gmail.com">bielinskikacper666@gmail.com</a>
+      </div>
 
-        // Navigation background change on scroll
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
+      <p class="copy">© 2025 Kacper Bieliński</p>
+    </div>
+  </section>
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                    
-                    // Special handling for skills
-                    if (entry.target.classList.contains('section-content')) {
-                        const skills = entry.target.querySelectorAll('.skill');
-                        skills.forEach((skill, index) => {
-                            setTimeout(() => {
-                                skill.classList.add('animate');
-                            }, index * 100);
-                        });
-                        
-                        // AI tools animation
-                        const aiTools = entry.target.querySelectorAll('.ai-tool');
-                        aiTools.forEach((tool, index) => {
-                            setTimeout(() => {
-                                tool.classList.add('animate');
-                            }, index * 200);
-                        });
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Observe all content sections
-        document.querySelectorAll('.content-section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Observe case studies
-        document.querySelectorAll('.case-study').forEach(caseStudy => {
-            observer.observe(caseStudy);
-        });
-
-        // Add stagger animation for service cards
-        const serviceCards = document.querySelectorAll('.service-card');
-        const serviceObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const cards = entry.target.querySelectorAll('.service-card');
-                    cards.forEach((card, index) => {
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, index * 150);
-                    });
-                }
-            });
-        }, { threshold: 0.1 });
-
-        // Initially hide service cards
-        serviceCards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
-        });
-
-        // Observe services section
-        const servicesSection = document.querySelector('#services .content-section');
-        if (servicesSection) {
-            serviceObserver.observe(servicesSection);
-        }
-    </script>
+  <!-- ===== LIGHTBOX ===== -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" hidden>
+    <div class="lightbox__backdrop"></div>
+    <div class="lightbox__dialog" role="dialog" aria-modal="true" aria-label="Podgląd pracy">
+      <button class="lightbox__close" aria-label="Zamknij podgląd">✕</button>
+      <div class="lightbox__stage" id="lightbox-stage" aria-live="polite"></div>
+      <p class="lightbox__caption" id="lightbox-caption"></p>
+    </div>
+  </div>
 </body>
 </html>

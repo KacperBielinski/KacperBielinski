@@ -1,0 +1,175 @@
+/* ===== Reset & tokens ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --nav-bg:#0b1120; --nav-text:#fff;
+  --bg1:#0f172a; --bg2:#111827;
+  --brand:#7c3aed; --brand2:#06b6d4;
+  --text:#e5e7eb; --muted:#9ca3af;
+  --panel:#0b1220; --card:#0f1526; --stroke:#1f2937;
+  --card-light:#0f1526;
+  --white:#ffffff;
+  --shadow:0 20px 50px rgba(0,0,0,.35);
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --nav-bg:#ffffff; --nav-text:#0b1220;
+    --bg1:#667eea; --bg2:#764ba2;
+    --text:#0b1220; --muted:#475569;
+    --panel:#ffffff; --card:#ffffff; --stroke:#e5e7eb; --card-light:#ffffff; --white:#ffffff;
+    --shadow:0 12px 28px rgba(0,0,0,.08);
+  }
+}
+html{scroll-behavior:smooth}
+body{ font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text);
+      background:linear-gradient(135deg,var(--bg1),var(--bg2)) }
+body.no-scroll{ overflow:hidden }
+
+/* ===== Layout helpers ===== */
+.container{width:min(1140px,92vw);margin-inline:auto;padding-inline:16px}
+section{scroll-margin-top:84px}
+
+/* ===== Generic content wrappers (dla „boxed” sekcji) ===== */
+.content-section{
+  background:var(--panel); border:1px solid var(--stroke); border-radius:16px;
+  box-shadow:var(--shadow); overflow:hidden; opacity:1; transform:none;
+}
+.section-content{ padding:28px; }
+.section-title{
+  font-size:1.6rem; font-weight:800; margin-bottom:10px; letter-spacing:.2px; color:var(--text);
+  position:relative;
+}
+.section-title::after{
+  content:''; position:absolute; left:0; bottom:-10px; width:64px; height:4px;
+  background:linear-gradient(90deg,var(--brand),var(--brand2)); border-radius:2px;
+}
+.muted{ color:var(--muted); margin-top:12px; }
+
+/* ===== Nav ===== */
+.nav{ position:sticky; top:0; z-index:1000; background:var(--nav-bg); color:var(--nav-text);
+      border-bottom:1px solid rgba(255,255,255,.08); box-shadow:0 8px 24px rgba(0,0,0,.18) }
+.nav__inner{display:flex;align-items:center;justify-content:space-between;padding-block:14px}
+.brand{font-weight:800;color:var(--nav-text);text-decoration:none;font-size:20px;letter-spacing:.5px}
+.nav__list{list-style:none;display:flex;gap:22px;margin:0;padding:0}
+.nav__link{color:var(--nav-text);opacity:.9;text-decoration:none;font-weight:600}
+.nav__link:hover,.nav__link.active{opacity:1;color:var(--nav-text)}
+
+/* ===== Hero ===== */
+.hero{min-height:60vh;display:grid;align-items:center;text-align:center}
+.hero .container{padding-block:64px}
+.hero h1{font-size:clamp(2.4rem,5vw,3.6rem);margin:0 0 8px;font-weight:800;letter-spacing:.3px;color:#fff}
+.subtitle{opacity:.9;margin:0 0 24px;font-weight:500;color:#fff}
+.cta{display:inline-block;text-decoration:none;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--brand),var(--brand2));padding:12px 20px;border-radius:999px;border:0;cursor:pointer;box-shadow:0 10px 24px rgba(124,58,237,.25)}
+.cta.ghost{background:transparent;border:1px solid rgba(255,255,255,.4);box-shadow:none}
+
+/* ===== About (kompakt) ===== */
+.about{ background:transparent; padding-block:24px 8px; }
+.about__card{ background:transparent; border:0; box-shadow:none; }
+.about__text{ padding:0; }
+.about__title{ font-size:1.5rem; font-weight:800; margin-bottom:8px; }
+.about__lead{ color:var(--text); opacity:.95; }
+.about__chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; list-style:none; padding:0; }
+.about__chips li{
+  background:linear-gradient(90deg,var(--brand),var(--brand2)); color:#fff;
+  padding:6px 12px; border-radius:999px; font-size:.9rem; font-weight:600;
+}
+
+/* ===== Reel ===== */
+.reel{background:var(--panel);border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);padding-block:40px 52px}
+.reel__title{margin:0 0 18px;font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.reel__track{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.reel__item{ background:var(--card);border:1px solid var(--stroke);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);cursor:pointer; opacity:0; transform:translateY(56px) scale(.985); will-change:transform,opacity; }
+.reel__item.is-visible{ animation:slideUp .9s cubic-bezier(.2,.7,.2,1) forwards }
+@keyframes slideUp{ 0%{opacity:0;transform:translateY(56px) scale(.985)} 60%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:1;transform:translateY(0) scale(1)} }
+.media{position:relative;aspect-ratio:16/10;background:#0b1220;overflow:hidden}
+.media__inner{width:100%;height:100%;transition:transform .45s ease}
+.media--img img,.media--video video{width:100%;height:100%;object-fit:cover;display:block}
+.reel__item:hover .media__inner{ transform: scale(1.04) }
+.reel__item:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
+.meta{padding:14px 16px 18px}
+.meta h3{margin:0 0 6px;font-size:1.05rem}
+.meta p{margin:0;color:var(--muted)}
+.reel__actions{display:flex;gap:12px;justify-content:center;margin-top:18px}
+
+/* ===== Services – bazowe siatki ===== */
+.services{ background:transparent; padding-block:40px 56px; }
+
+/* oryginalna siatka (dla zgodności, gdybyś użył starych klas) */
+.services__grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+
+/* === Boxed services enhancements (Twoje) === */
+.services-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); }
+.services-grid--boxed { gap: 32px; }
+.service-card{ position:relative; }
+.service-card--boxed{
+  background:#ffffff;
+  border:1px solid #e9eef5;
+  box-shadow: 0 6px 20px rgba(27, 39, 94, 0.06);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  will-change: transform;
+  isolation:isolate;
+  border-radius:14px;
+  padding:24px;
+  opacity:0; transform:translateY(30px);
+}
+.service-card--boxed:hover{
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 14px 32px rgba(27, 39, 94, 0.12);
+  border-color:#d9e2ef;
+}
+.service-card--boxed:focus-visible{
+  outline: none;
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 0 0 4px rgba(102,126,234,.2), 0 14px 32px rgba(27,39,94,.12);
+}
+@media (prefers-reduced-motion: reduce){
+  .service-card--boxed, .service-card--boxed:hover, .service-card--boxed:focus-visible{
+    transition: none;
+    transform: none;
+  }
+}
+.service-card--boxed h3{ color:#3b5ad5; margin-bottom:10px; font-size:1.15rem; }
+.service-card--boxed p{ color:#475569; }
+
+/* ===== Contact ===== */
+.contact{ text-align:center; padding-block:64px 56px; }
+.contact h2{ font-size:1.6rem; font-weight:800; letter-spacing:.2px; }
+.contact__box{ margin-top:20px; display:flex; justify-content:center; }
+.contact__mail{
+  display:inline-block; margin-top:8px;
+  background:linear-gradient(90deg,var(--brand),var(--brand2)); color:#fff;
+  padding:14px 20px; border-radius:12px; text-decoration:none; font-weight:700;
+  box-shadow:0 10px 24px rgba(124,58,237,.25);
+}
+.copy{ opacity:.9; margin-top:22px; }
+
+/* ===== Lightbox (skalowanie) ===== */
+.lightbox[hidden]{ display:none }
+.lightbox{ position:fixed; inset:0; z-index:2000; }
+.lightbox__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.86); }
+.lightbox__dialog{
+  position:relative; height:100%; width:100%;
+  display:grid; grid-template-rows: 1fr auto;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  align-items:center; justify-items:center;
+}
+.lightbox__stage{ width:100%; height:100%; display:grid; place-items:center; overflow:hidden; }
+.lightbox__stage img, .lightbox__stage video{
+  max-width: min(92vw, 1400px);
+  max-height: min(86vh, 900px);
+  width:auto; height:auto; object-fit:contain;
+  background:#000; border-radius:12px; display:block;
+}
+.lightbox__close{
+  position:absolute; top:18px; right:18px; z-index:1;
+  border:0; border-radius:999px; padding:8px 12px; cursor:pointer;
+  background:rgba(255,255,255,.15); color:#fff; backdrop-filter:blur(6px);
+  font-size:18px; line-height:1;
+}
+.lightbox__caption{ color:#e5e7eb; text-align:center; margin-top:10px; max-width:92vw }
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reel__item{opacity:1; transform:none}
+}
