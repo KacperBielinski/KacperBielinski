@@ -46,6 +46,35 @@ if (reel){
   }, { threshold: .25 });
   ioReel.observe(reel);
 }
+/* ========= MOTION: sekwencyjne wysuwanie ========= */
+const motion  = qs('#motion');
+const motionItems = motion ? qsa('.motion__item', motion) : [];
+let motionRevealed = false;
+
+function runMotionReveal(){
+  if (motionRevealed) return;
+  motionRevealed = true;
+  motionItems.forEach((item, i) =>
+    setTimeout(() => item.classList.add('is-visible'), i * 550)
+  );
+}
+if (motion){
+  const ioMotion = new IntersectionObserver((entries)=>{
+    entries.forEach(e => { if (e.isIntersecting) runMotionReveal(); });
+  }, { threshold: .25 });
+  ioMotion.observe(motion);
+}
+
+/* Klik w motion item → lightbox */
+motionItems.forEach(card => {
+  card.addEventListener('click', () => {
+    const type  = card.getAttribute('data-type');
+    const src   = card.getAttribute('data-src');
+    const title = card.getAttribute('data-title');
+    openLightbox({ type, src, title });
+  });
+});
+
 
 /* ========= SERVICES: sekwencyjna animacja kart ========= */
 const servicesGrid = qs('.services-grid');
