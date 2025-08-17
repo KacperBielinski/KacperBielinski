@@ -191,3 +191,17 @@ section{scroll-margin-top:84px}
   *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .reel__item{opacity:1; transform:none}
 }
+
+/* ===== Motion Design ===== */
+.motion{background:var(--panel);border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);padding-block:40px 52px}
+.motion__title{margin:0 0 18px;font-size:1.6rem;font-weight:800;
+  background:linear-gradient(90deg,var(--brand),var(--brand2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.motion__track{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.motion__item{
+  background:var(--card);border:1px solid var(--stroke);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);cursor:pointer; opacity:0; transform:translateY(56px) scale(.985); will-change:transform,opacity;
+}
+.motion__item.is-visible{ animation:slideUp .9s cubic-bezier(.2,.7,.2,1) forwards }
+.motion__item:hover .media__inner{ transform: scale(1.04) }
+.motion__item:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
